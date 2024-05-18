@@ -1,0 +1,44 @@
+ion-header{
+    ion-toolbar{
+        --padding-start: 16px;
+        --padding-end: 16px;
+        ion-title{
+            /*  font-size: 1.1rem; -->
+            // letter-spacing: 0.5px;*/
+            max-width: 40vh;
+            ion-label{
+                ion-text{
+                    font-size: 1rem;
+                }
+                p{
+                    ion-text{
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+ion-content{
+    ion-row.banners{
+        position: relative;
+        padding: 1.5rem;
+        height: 34vh;
+
+        background: linear-gradient(120.69deg, #03b5aa 17.45%, rgba(162, 167, 127, 0.09) 105.58%);
+        border-radius: 2.5rem;
+        margin: 6vh 1rem 0 1rem;
+        swiper {
+            div{
+                ion-label {
+                    p.acc-amt{
+                        margin: 1rem 0;
+                        font-size: 3rem;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+}
