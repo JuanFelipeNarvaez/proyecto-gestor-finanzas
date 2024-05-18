@@ -17,4 +17,6 @@ public interface IGastoService {
     public List<Gasto> findByPersona(Persona persona);
 
     public List<Gasto> findGastosByPersonaId(String personaId);
+
+    public List<Gasto> findGastosByPersonaIdAndOpcion(String personaId, String opcion);
 }

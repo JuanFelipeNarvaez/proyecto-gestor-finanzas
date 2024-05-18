@@ -19,6 +19,8 @@ public class Gasto {
     private Date fecha;
     @Field
     private String comentario;
+    @Field
+    private String opcion;
 
     @DBRef
     private Persona persona;
@@ -69,5 +71,13 @@ public class Gasto {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
     }
 }

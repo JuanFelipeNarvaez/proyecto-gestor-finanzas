@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue'
 import ClientePage from '../views/ClientePage.vue'
 import LoginPage from '../views/LoginPage.vue'
-import DasboardPage from '../views/DasboardPage.vue'
+import DashboardPage from '../views/DashboardPage.vue';
 import PersonaPage from '../views/PersonaPage.vue'
 import InicioPage from '@/views/InicioPage.vue';
 import ProductoPage from '@/views/GastoPage.vue';
@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: DasboardPage
+    component: DashboardPage
   },
   {
     path: '/gasto',

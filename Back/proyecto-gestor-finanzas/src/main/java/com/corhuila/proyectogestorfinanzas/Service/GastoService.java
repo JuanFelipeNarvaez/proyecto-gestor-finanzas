@@ -67,4 +67,9 @@ public class GastoService implements IGastoService {
         return repository.findByPersonaId(personaId);
     }
 
+    @Override
+    public List<Gasto> findGastosByPersonaIdAndOpcion(String personaId, String opcion){
+        return repository.findByPersonaIdAndOpcion(personaId, opcion);
+    }
+
 }

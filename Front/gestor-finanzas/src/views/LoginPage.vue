@@ -23,10 +23,10 @@
               class="input" />
           </ion-item>
           <div>
-            <a href="dashboard">Forgot password? </a>
+            <a href="dashboard" style="color: darkblue;">Forgot password?</a>
           </div>
           <div>
-            <p> New member?<a href="registro">Signup now</a></p>
+            <p> New member?<a href="registro" style="color: darkblue">Signup now</a></p>
           </div>
           <ion-button shape='round' class='button' expand='full' @click="loginn">
             Login
@@ -102,6 +102,7 @@ const loginn = async () => {
     if (response.data) {
       const userId = response.data.id;
       const nombre = response.data.nombre;
+      const opcion = response.data.opcion;
       localStorage.setItem('nombre', nombre);
       localStorage.setItem('id', userId);
       localStorage.setItem('gmail', gmail.value);

@@ -5,6 +5,10 @@
     height: 100%;
 }
 
+ion-content{
+    --background:linear-gradient( to right , #f46b45, #eea849)
+}
+
 
 .my-custom-modal {
     --background: rgba(0, 0, 0, 0.5);

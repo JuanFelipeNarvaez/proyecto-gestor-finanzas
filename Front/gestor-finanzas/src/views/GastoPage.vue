@@ -2,6 +2,9 @@
   <ion-page @ionViewDidEnter="findAllRecords">
     <ion-header :translucent="true">
       <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="dashboard" style="margin-top: 5px"></ion-back-button>
+        </ion-buttons>
         <ion-title>Gastos</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -32,7 +35,7 @@
 
         <!-- Mostrar datos -->
         <div class="table-container">
-          <ion-list>
+          <ion-list style="background: linear-gradient( to right, #f46b45, #eea849);">
             <ion-accordion-group>
               <ion-accordion v-for="(item, index) in items" :key="index" style="background: #ff3f3f;">
                 <ion-item slot="header" color="danger">
@@ -84,7 +87,11 @@
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonIcon, IonModal } from '@ionic/vue';
+import {
+  IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonIcon, IonModal,
+  IonList, IonAccordion, IonAccordionGroup, IonItem, IonButton, IonLabel,
+  IonButtons, IonBackButton
+} from '@ionic/vue';
 import InputComponent from '@/components/InputComponent.vue';
 import CrudButtonComponent from '@/components/CrudButtonComponent.vue';
 import { showSuccessMessage, showErrorMessage } from '@/utils/alerts';
@@ -105,6 +112,7 @@ const valor = ref('');
 const categoria = ref('');
 const fecha = ref('');
 const comentario = ref('');
+const opcion = ref('');
 const persona = ref('');
 
 const showFind = ref<boolean>(false);
@@ -113,6 +121,8 @@ const showUpdated = ref<boolean>(false);
 const showDeleted = ref<boolean>(false);
 
 const idref = localStorage.getItem('id');
+localStorage.setItem('opcion', 'gasto');
+const opcion1 = localStorage.getItem('opcion');
 
 
 // Tipos
@@ -131,7 +141,7 @@ onMounted(() => {
 // Métodos
 async function findAllRecords() {
   try {
-    const response = await axios.get(`http://localhost:9000/prueba/api/gasto/byPersona/${idref}`);
+    const response = await axios.get(`http://localhost:9000/prueba/api/gasto/byPersona/${idref}/${opcion1}`);
     items.value = response.data;
   } catch (error) {
     console.error('Error al obtener todos los registros:', error);
@@ -170,6 +180,7 @@ async function createRecord() {
     categoria: categoria.value,
     fecha: fecha.value,
     comentario: comentario.value,
+    opcion: opcion1,
     persona: {
       id: idref
     }

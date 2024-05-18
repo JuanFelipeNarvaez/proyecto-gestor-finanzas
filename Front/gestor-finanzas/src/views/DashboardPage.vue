@@ -45,7 +45,7 @@
             <ion-row>
               <ion-col size="6" click="producto">
                 <div class="col_div">
-                  <ion-button expand="full" fill="clear" href="persona" class="button">
+                  <ion-button expand="full" fill="clear" href="ingreso" class="button">
                     <ion-icon :icon="IonIcons.trendingUpOutline" class="iconn"></ion-icon></ion-button>
                   <ion-label>Ingresos</ion-label>
                 </div>

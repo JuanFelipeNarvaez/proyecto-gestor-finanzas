@@ -55,4 +55,9 @@ public class GastoController {
     public List<Gasto> getGastosByPersonaId(@PathVariable String personaId){
         return service.findGastosByPersonaId(personaId);
     }
+
+    @GetMapping("/byPersona/{personaId}/{opcion}")
+    public List<Gasto> getGastoByPersonaIdAndOpcion(@PathVariable String personaId, @PathVariable String opcion){
+        return service.findGastosByPersonaIdAndOpcion(personaId, opcion);
+    }
 }

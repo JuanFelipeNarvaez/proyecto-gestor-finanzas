@@ -16,4 +16,6 @@ public interface IGastoRepository extends MongoRepository<Gasto, String> {
 
     List<Gasto> findByPersonaId(String personaId);
 
+    List<Gasto> findByPersonaIdAndOpcion(String personaId, String opcion);
+
 }
