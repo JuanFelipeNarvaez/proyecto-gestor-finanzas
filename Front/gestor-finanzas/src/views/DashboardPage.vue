@@ -1,21 +1,4 @@
 <template>
-  <ion-menu content-id="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu Content</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <ion-button style="height: 10px" fill="clear" expand="full">
-        <ion-icon slot="icon-only" :icon="IonIcons.logInOutline" style="color: black;"></ion-icon>
-        <a>hola</a>
-      </ion-button>
-      <ion-button fill="clear" expand="full">
-        <ion-icon slot="icon-only" :icon="IonIcons.logInOutline" style="color: black;"></ion-icon>
-        <ion-label>button de no c</ion-label>
-      </ion-button>
-    </ion-content>
-  </ion-menu>
   <ion-page id="main-content">
     <ion-header :translucent="true">
       <ion-toolbar>
@@ -33,6 +16,7 @@
           <div class="first_div">
             <ion-label class="welcome">Welcome</ion-label>
             <ion-label class="username">{{ nombre }}</ion-label>
+            <ion-label class="username">{{ rol }}</ion-label>
           </div>
           <div class="user_back">
             <img src="../assets/perfil.png" />
@@ -112,7 +96,8 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
 
 const gmail = localStorage.getItem('gmail');
 const id = localStorage.getItem('id');
-const nombre = localStorage.getItem('nombre')
+const nombre = localStorage.getItem('nombre');
+const rol = localStorage.getItem('rol');
 
 </script>
 

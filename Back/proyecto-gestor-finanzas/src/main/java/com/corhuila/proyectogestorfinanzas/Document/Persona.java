@@ -1,6 +1,7 @@
 package com.corhuila.proyectogestorfinanzas.Document;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -18,6 +19,16 @@ public class Persona {
     private String gmail;
     @Field
     private String password;
+    @DBRef
+    private Rol rol;
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
 
     public String getId() {
         return id;

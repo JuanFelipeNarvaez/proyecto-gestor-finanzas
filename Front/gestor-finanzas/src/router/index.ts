@@ -10,6 +10,7 @@ import ProductoPage from '@/views/GastoPage.vue';
 import RegistroPage from '@/views/RegistroPage.vue';
 import GastoPage from '@/views/GastoPage.vue';
 import IngresoPage from '@/views/IngresoPage.vue';
+import DashboardAdminPage from '@/views/DashboardAdminPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -55,7 +56,12 @@ const routes: Array<RouteRecordRaw> = [
     path:'/ingreso',
     name: 'Ingreso',
     component: IngresoPage
-  }
+  },
+  {
+    path:'/dashboardAdmin',
+    name: 'DashboardAdmin',
+    component: DashboardAdminPage
+  },
 ]
 
 const router = createRouter({

@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.Date;
 
 @Document(collection = "gasto")
-public class Gasto {
+public class Finanza {
     @Id
     private String id;
     @Field

@@ -17,23 +17,23 @@
                 <div>
                     <ion-item>
                         <ion-icon :icon="IonIcons.personOutline"></ion-icon>
-                        <InputComponent id="nombre" name="nombre" placeholder="nombre" class="input" />
+                        <InputComponent v-model="nombre" id="nombre" name="nombre" placeholder="nombre" class="input" />
                     </ion-item>
                     <ion-item>
                         <ion-icon :icon="IonIcons.personOutline"></ion-icon>
-                        <InputComponent id="apellido" name="apellido" placeholder="apellido" class="input" />
+                        <InputComponent v-model="apellido" id="apellido" name="apellido" placeholder="apellido" class="input" />
                     </ion-item>
                     <ion-item>
                         <ion-icon :icon="IonIcons.todayOutline"></ion-icon>
-                        <InputComponent id="edad" name="edad" placeholder="edad" class="input" />
+                        <InputComponent v-model="edad" id="edad" name="edad" placeholder="edad" class="input" />
                     </ion-item>
                     <ion-item>
                         <ion-icon :icon="IonIcons.logoGoogle"></ion-icon>
-                        <InputComponent id="gmail" name="gmail" placeholder="gmail" class="input" />
+                        <InputComponent v-model="gmail" id="gmail" name="gmail" placeholder="gmail" class="input" />
                     </ion-item>
                     <ion-item>
                         <ion-icon :icon="IonIcons.lockClosedOutline"></ion-icon>
-                        <InputComponent id="password" name="password" placeholder="password" class="input" />
+                        <InputComponent v-model="password" id="password" name="password" placeholder="password" class="input" />
                     </ion-item>
                     <CrudButtonComponent @create-record="createRecord" href="login" class="buttonCrear"/>
                 </div>
@@ -55,12 +55,29 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
 import * as IonIcons from 'ionicons/icons';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { ref } from 'vue';
 
 
 
 
-// Rutas de la API
 const baseURL = 'http://localhost:9000/prueba/api/persona';
+const nombre= ref('');
+const apellido = ref('');
+const edad = ref('');
+const gmail = ref('');
+const password = ref('')
+
+interface ItemType {
+  id: string;
+  nombre: string;
+  apellido: string;
+  edad: string;
+  gmail: string;
+  password: string;
+  rol: string;
+}
+
+
 
 async function findAllRecords() {
     try {
@@ -78,7 +95,10 @@ async function createRecord() {
         apellido: apellido.value,
         edad: edad.value,
         gmail: gmail.value,
-        password: password.value
+        password: password.value,
+        rol: {
+            id: "664c42f942560c6047422235"
+        }
     };
 
     try {

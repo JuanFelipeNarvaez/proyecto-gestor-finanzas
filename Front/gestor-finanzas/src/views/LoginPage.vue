@@ -102,11 +102,11 @@ const loginn = async () => {
     if (response.data) {
       const userId = response.data.id;
       const nombre = response.data.nombre;
-      const opcion = response.data.opcion;
       localStorage.setItem('nombre', nombre);
       localStorage.setItem('id', userId);
       localStorage.setItem('gmail', gmail.value);
-      router.push('/dashboard');
+        router.push('/dashboard');
+      
     } else {
       error.value = 'Incorrect credentials. Please try again.';
     }

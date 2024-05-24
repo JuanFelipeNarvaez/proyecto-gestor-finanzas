@@ -1,8 +1,9 @@
 package com.corhuila.proyectogestorfinanzas.Controller;
 
-import com.corhuila.proyectogestorfinanzas.Document.Gasto;
+import com.corhuila.proyectogestorfinanzas.Document.Finanza;
 import com.corhuila.proyectogestorfinanzas.Document.Persona;
-import com.corhuila.proyectogestorfinanzas.IService.IGastoService;
+import com.corhuila.proyectogestorfinanzas.Document.SumaResponse;
+import com.corhuila.proyectogestorfinanzas.IService.IFinanzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,27 +13,27 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/gasto")
-public class GastoController {
+public class FinanzaController {
     @Autowired
-    private IGastoService service;
+    private IFinanzaService service;
 
     @GetMapping()
-    public List<Gasto> findAll(){
+    public List<Finanza> findAll(){
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Gasto> findById(@PathVariable String id){
+    public Optional<Finanza> findById(@PathVariable String id){
         return service.findById(id);
     }
 
     @PostMapping()
-    public Gasto save(@RequestBody Gasto gasto){
+    public Finanza save(@RequestBody Finanza gasto){
         return service.save(gasto);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody Gasto gasto, @PathVariable String id){
+    public void update(@RequestBody Finanza gasto, @PathVariable String id){
         service.update(gasto, id);
     }
 
@@ -42,22 +43,27 @@ public class GastoController {
     }
 
     @GetMapping("/findByCategoria/{categoria}")
-    public List<Gasto> findByCategoria(@PathVariable String categoria){
+    public List<Finanza> findByCategoria(@PathVariable String categoria){
         return service.findByCategoria(categoria);
     }
 
     @GetMapping("/{persona}")
-    public List<Gasto> findByPersona(@PathVariable Persona persona){
+    public List<Finanza> findByPersona(@PathVariable Persona persona){
         return service.findByPersona(persona);
     }
 
     @GetMapping("/byPersona/{personaId}")
-    public List<Gasto> getGastosByPersonaId(@PathVariable String personaId){
+    public List<Finanza> getGastosByPersonaId(@PathVariable String personaId){
         return service.findGastosByPersonaId(personaId);
     }
 
     @GetMapping("/byPersona/{personaId}/{opcion}")
-    public List<Gasto> getGastoByPersonaIdAndOpcion(@PathVariable String personaId, @PathVariable String opcion){
+    public List<Finanza> getGastoByPersonaIdAndOpcion(@PathVariable String personaId, @PathVariable String opcion){
         return service.findGastosByPersonaIdAndOpcion(personaId, opcion);
+    }
+
+    @GetMapping("/byPersona/{personaId}/suma/{opcion}")
+    public SumaResponse sumatoria(@PathVariable String personaId, @PathVariable String opcion){
+        return service.findGastosByPersonaIdAndOpcionSum(personaId, opcion);
     }
 }

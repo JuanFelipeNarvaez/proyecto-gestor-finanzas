@@ -40,6 +40,7 @@ public class PersonaService implements IPersonaService {
             personaUpdate.setEdad(persona.getEdad());
             personaUpdate.setGmail(persona.getGmail());
             personaUpdate.setPassword(persona.getPassword());
+            personaUpdate.setRol(persona.getRol());
 
             repository.save(personaUpdate);
         }else{
