@@ -3,7 +3,7 @@
       <ion-header :translucent="true">
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-back-button defaultHref="dashboard" style="margin-top: 5px"></ion-back-button>
+            <ion-back-button defaultHref="dashboardAdmin" style="margin-top: 5px"></ion-back-button>
           </ion-buttons>
           <ion-title>Finanzas</ion-title>
         </ion-toolbar>
@@ -30,7 +30,15 @@
                 </ion-item>
                 <InputComponent v-model="fecha" id="fecha" name="fecha" label="Fecha: " type="date" />
                 <InputComponent v-model="comentario" id="comentario" name="comentario" label="Comentario: " />
-                <InputComponent v-model="opcion" id="opcion" name="opcion" label="Opcion: " />
+                <ion-item>
+                  <ion-label>Opcion: </ion-label>
+                  <ion-select v-model="opcion" placeholder="Seleccione una opcion">
+                    <ion-select-option v-for="opcionItem in opciones" :key="opcionItem.id"
+                      :value="opcionItem.id">
+                      {{ opcionItem.nombre }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
                 <ion-item>
                   <ion-label>Persona: </ion-label>
                   <ion-select v-model="persona" placeholder="Seleccione una categoria">
@@ -57,7 +65,7 @@
               <ion-accordion-group>
                 <ion-accordion v-for="(item, index) in items" :key="index" style="background: yellow;">
                   <ion-item slot="header" color="warning">
-                    <ion-icon :icon="IonIcons.trendingDownOutline"></ion-icon>
+                    <ion-icon :icon="IonIcons.barChartOutline"></ion-icon>
                     <ion-label style="margin-left: 20px">Finanza</ion-label>
                   </ion-item>
                   <div class="ion-padding" slot="content">
@@ -93,7 +101,7 @@
                   <div class="ion-padding" slot="content">
                     <ion-item>
                       <ion-label>Opcion: </ion-label>
-                      <ion-label>{{ item.opcion }}</ion-label>
+                      <ion-label>{{ item.opcion.nombre }}</ion-label>
                     </ion-item>
                   </div>
                   <div class="ion-pading" slot="content">
@@ -133,12 +141,13 @@
   
   // Rutas de la API
   // const baseURL = 'http://localhost:9000/shopping-car/api/cliente';
-  const baseURL = 'http://localhost:9000/prueba/api/gasto';
+  const baseURL = 'http://localhost:9000/prueba/api/finanza';
   //const baseURL = 'https://zctlpc09-9000.use.devtunnels.ms/shopping-car/api/cliente';
   const modalIsOpen = ref(false);
   const items = ref<Array<ItemType>>([]);
   const categorias = ref<Array<CategoriaType>>([]);
   const personas = ref<Array<PersonaType>>([]);
+  const opciones = ref<Array<OpcionType>>([]);
   
   const id = ref('');
   const valor = ref('');
@@ -178,17 +187,22 @@
     id: string;
     nombre: string;
   }
+  interface OpcionType {
+    id: string;
+    nombre: string;
+  }
   
   onMounted(() => {
     findAllRecords();
     findAllCategorias();
     findAllPersonas();
+    findAllOpciones();
   });
   
   // Métodos
   async function findAllRecords() {
     try {
-      const response = await axios.get(`http://localhost:9000/prueba/api/gasto`);
+      const response = await axios.get(baseURL);
       items.value = response.data;
     } catch (error) {
       console.error('Error al obtener todos los registros:', error);
@@ -198,7 +212,7 @@
   async function findAllCategorias() {
     try {
       const response = await axios.get('http://localhost:9000/prueba/api/categoria');
-      console.log('Categorias response:', response.data)
+      //console.log('Categorias response:', response.data)
       categorias.value = response.data;
     } catch (error) {
       console.error('Error al obtener todos los roles:', error);
@@ -209,8 +223,19 @@
   async function findAllPersonas() {
     try {
       const response = await axios.get('http://localhost:9000/prueba/api/persona');
-      console.log('Categorias response:', response.data)
+      //console.log('Personas response:', response.data)
       personas.value = response.data;
+    } catch (error) {
+      console.error('Error al obtener todos los roles:', error);
+      throw error;
+    }
+  }
+
+  async function findAllOpciones() {
+    try {
+      const response = await axios.get('http://localhost:9000/prueba/api/opcion');
+      //console.log('Opciones response:', response.data)
+      opciones.value = response.data;
     } catch (error) {
       console.error('Error al obtener todos los roles:', error);
       throw error;
@@ -229,6 +254,7 @@
       categoria.value = data.categoria.id;
       fecha.value = data.fecha;
       comentario.value = data.comentario;
+      opcion.value = data.opcion.id;
       persona.value = data.persona.id;
   
       // Controlar la visibilidad de los botones
@@ -251,13 +277,15 @@
       },
       fecha: fecha.value,
       comentario: comentario.value,
-      opcion: opcion.value,
+      opcion: {
+        id: opcion.value
+      },
       persona: {
         id: persona.value,
       }
       
     };
-    console.log('Datos enviados:', data);
+    //console.log('Datos enviados:', data);
   
     try {
       const response = await axios.post(baseURL, data);
@@ -281,6 +309,9 @@
       },
       fecha: fecha.value,
       comentario: comentario.value,
+      opcion: {
+        id: opcion.value
+      },
       persona: {
         id: persona.value
       }
@@ -317,21 +348,12 @@
     }
   }
   
-  async function deleteRecordLogical(id) {
-    try {
-      const response = await axios.put(`${baseURL}/delete-logical/${id}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error al realizar el eliminado lógico:', error);
-      throw error;
-    }
-  }
-  
   async function clearData() {
     valor.value = '';
     categoria.value = '';
     fecha.value = '';
     comentario.value = '';
+    opcion.value = '';
     persona.value = '';
   }
   

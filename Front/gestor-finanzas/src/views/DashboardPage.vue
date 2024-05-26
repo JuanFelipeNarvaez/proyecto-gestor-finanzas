@@ -27,14 +27,14 @@
           <ion-label class="hello_lbl">Hello, Please Choose Your Subject</ion-label>
           <ion-grid fixed>
             <ion-row>
-              <ion-col size="6" click="producto">
+              <ion-col size="6" click="ingreso">
                 <div class="col_div">
                   <ion-button expand="full" fill="clear" href="ingreso" class="button">
                     <ion-icon :icon="IonIcons.trendingUpOutline" class="iconn"></ion-icon></ion-button>
                   <ion-label>Ingresos</ion-label>
                 </div>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="6" click="gasto">
                 <div class="col_div">
                   <ion-button expand="full" fill="clear" class="button" href="gasto">
                     <ion-icon :icon="IonIcons.trendingDownOutline" class="iconn"></ion-icon>
@@ -44,15 +44,15 @@
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col size="6" click="producto">
+              <ion-col size="6">
                 <div class="col_div">
                   <ion-button expand="full" fill="clear">
                     <ion-icon :icon="IonIcons.personCircleOutline" class="iconn"></ion-icon></ion-button>
-                  <ion-label>Perfil</ion-label>
+                  <ion-label>Proximamente</ion-label>
                 </div>
               </ion-col>
               <ion-col size="6">
-                <div class="col_div">
+                <div class="col_div" click="gitHub">
                   <ion-button expand="full" fill="clear" class="button" href="https://github.com/code-corhuila/programacion-movil-2024-a">
                     <ion-icon :icon="IonIcons.logoGithub" class="iconn"></ion-icon>
                   </ion-button>
@@ -61,11 +61,11 @@
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col size="6" click="producto">
+              <ion-col size="6" click="">
                 <div class="col_div">
                   <ion-button expand="full" fill="clear">
                     <ion-icon :icon="IonIcons.airplane" class="iconn"></ion-icon></ion-button>
-                  <ion-label>hola</ion-label>
+                  <ion-label>Proximamente</ion-label>
                 </div>
               </ion-col>
               <ion-col size="6">
@@ -73,7 +73,7 @@
                   <ion-button expand="full" fill="clear" class="button">
                     <ion-icon :icon="IonIcons.alert" class="iconn"></ion-icon>
                   </ion-button>
-                  <ion-label></ion-label>
+                  <ion-label>Proximamente</ion-label>
                 </div>
               </ion-col>
             </ion-row>

@@ -51,7 +51,7 @@
                   <ion-label style="margin-left: 20px">Gasto</ion-label>
                 </ion-item>
                 <div class="ion-padding" slot="content">
-                  <ion-item style="background: rosybrown;">
+                  <ion-item>
                     <ion-label>Valor: </ion-label>
                     <ion-label>{{ item.valor }}</ion-label>
                   </ion-item>
@@ -111,7 +111,7 @@ import axios from 'axios';
 
 // Rutas de la API
 // const baseURL = 'http://localhost:9000/shopping-car/api/cliente';
-const baseURL = 'http://localhost:9000/prueba/api/gasto';
+const baseURL = 'http://localhost:9000/prueba/api/finanza';
 //const baseURL = 'https://zctlpc09-9000.use.devtunnels.ms/shopping-car/api/cliente';
 const modalIsOpen = ref(false);
 const items = ref<Array<ItemType>>([]);
@@ -157,7 +157,7 @@ onMounted(() => {
 // Métodos
 async function findAllRecords() {
   try {
-    const response = await axios.get(`http://localhost:9000/prueba/api/gasto/byPersona/${idref}/${opcion1}`);
+    const response = await axios.get(`http://localhost:9000/prueba/api/finanza/byPersona/${idref}/66538ac149119e23a98bd619`);
     items.value = response.data;
   } catch (error) {
     console.error('Error al obtener todos los registros:', error);
@@ -208,7 +208,9 @@ async function createRecord() {
     },
     fecha: fecha.value,
     comentario: comentario.value,
-    opcion: opcion1,
+    opcion: {
+      id: "66538ac149119e23a98bd619"
+    },
     persona: {
       id: idref
     }
@@ -267,16 +269,6 @@ async function deleteRecordPhysical(id: String) {
     return response.data;
   } catch (error) {
     console.error('Error al eliminar el registro físico:', error);
-    throw error;
-  }
-}
-
-async function deleteRecordLogical(id) {
-  try {
-    const response = await axios.put(`${baseURL}/delete-logical/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error al realizar el eliminado lógico:', error);
     throw error;
   }
 }

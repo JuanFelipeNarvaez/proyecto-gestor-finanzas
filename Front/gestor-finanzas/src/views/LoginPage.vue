@@ -23,12 +23,12 @@
               class="input" />
           </ion-item>
           <div>
-            <a href="dashboard" style="color: darkblue;">Forgot password?</a>
+            <a href="" style="color: darkblue;">Forgot password?</a>
           </div>
           <div>
             <p> New member?<a href="registro" style="color: darkblue">Signup now</a></p>
           </div>
-          <ion-button shape='round' class='button' expand='full' @click="loginn">
+          <ion-button shape='round' class='button' expand='full' @click="login">
             Login
           </ion-button>
         </div>
@@ -67,27 +67,6 @@ const error = ref<string | null>(null);
 const router = useRouter(); // Obtener el objeto del enrutador
 
 const login = async () => {
-  try {
-    const response = await axios.post(`${baseURL}/login`, {
-      gmail: gmail.value,
-      password: password.value
-    });
-    if (response.data) {
-      localStorage.setItem('gmail', gmail.value);
-      localStorage.setItem('id', id.value)
-      router.push('/dashboard');
-      alert(gmail.value);
-    } else {
-      // Mostrar un mensaje de error al usuario si las credenciales son incorrectas
-      console.error('Credenciales incorrectas');
-    }
-  } catch (error) {
-    // Manejo de errores, por ejemplo, mostrar un mensaje de error al usuario
-    console.error('Error:', error);
-  }
-}
-
-const loginn = async () => {
   if (!gmail.value || !password.value) {
     error.value = 'Please enter both email and password.';
     return;
@@ -107,10 +86,10 @@ const loginn = async () => {
       localStorage.setItem('id', userId);
       localStorage.setItem('gmail', gmail.value);
       localStorage.setItem('rol', rol);
-      if(rol == 'Usuario'){
-        router.push('/dashboard');
+      if(rol == 'Administrador'){
+        router.push('/dashboardAdmin');
       }else{
-        router.push('/dashboardAdmin')
+        router.push('/dashboard')
       }
     } else {
       error.value = 'Incorrect credentials. Please try again.';

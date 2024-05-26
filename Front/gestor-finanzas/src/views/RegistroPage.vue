@@ -33,7 +33,7 @@
                     </ion-item>
                     <ion-item>
                         <ion-icon :icon="IonIcons.lockClosedOutline"></ion-icon>
-                        <InputComponent v-model="password" id="password" name="password" placeholder="password" class="input" />
+                        <InputComponent v-model="password" id="password" name="password" placeholder="password" class="input" type="password"/>
                     </ion-item>
                     <CrudButtonComponent @create-record="createRecord" href="login" class="buttonCrear"/>
                 </div>

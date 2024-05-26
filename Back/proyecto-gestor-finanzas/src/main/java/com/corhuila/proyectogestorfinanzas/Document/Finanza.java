@@ -20,8 +20,8 @@ public class Finanza {
     private LocalDate fecha;
     @Field
     private String comentario;
-    @Field
-    private String opcion;
+    @DBRef
+    private Opcion opcion;
 
     @DBRef
     private Persona persona;
@@ -74,11 +74,11 @@ public class Finanza {
         this.comentario = comentario;
     }
 
-    public String getOpcion() {
+    public Opcion getOpcion() {
         return opcion;
     }
 
-    public void setOpcion(String opcion) {
+    public void setOpcion(Opcion opcion) {
         this.opcion = opcion;
     }
 }

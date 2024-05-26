@@ -5,7 +5,7 @@
                 <ion-buttons slot="start">
                     <ion-back-button defaultHref="dashboardAdmin" style="margin-top: 5px"></ion-back-button>
                 </ion-buttons>
-                <ion-title>Categoria</ion-title>
+                <ion-title>Roles</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content fullscreen>
@@ -35,10 +35,10 @@
                 <div class="table-container">
                     <ion-list style="background: linear-gradient( to right, #f46b45, #eea849);">
                         <ion-accordion-group>
-                            <ion-accordion v-for="(item, index) in items" :key="index" style="background: #ff3f3f;">
-                                <ion-item slot="header" color="danger">
-                                    <ion-icon :icon="IonIcons.pricetagsOutline"></ion-icon>
-                                    <ion-label style="margin-left: 20px">Categoria</ion-label>
+                            <ion-accordion v-for="(item, index) in items" :key="index" style="background: mediumpurple">
+                                <ion-item slot="header" color="tertiary">
+                                    <ion-icon :icon="IonIcons.peopleCircleOutline"></ion-icon>
+                                    <ion-label style="margin-left: 20px">Rol</ion-label>
                                 </ion-item>
                                 <div class="ion-padding" slot="content">
                                     <ion-item>
@@ -82,7 +82,7 @@ import axios from 'axios';
 
 // Rutas de la API
 // const baseURL = 'http://localhost:9000/shopping-car/api/cliente';
-const baseURL = 'http://localhost:9000/prueba/api/categoria';
+const baseURL = 'http://localhost:9000/prueba/api/rol';
 //const baseURL = 'https://zctlpc09-9000.use.devtunnels.ms/shopping-car/api/cliente';
 const modalIsOpen = ref(false);
 const items = ref<Array<ItemType>>([]);
@@ -145,7 +145,7 @@ async function createRecord() {
     const data = {
         nombre: nombre.value
     };
-    console.log('Datos enviados:', data);
+    //console.log('Datos enviados:', data);
 
     try {
         const response = await axios.post(baseURL, data);

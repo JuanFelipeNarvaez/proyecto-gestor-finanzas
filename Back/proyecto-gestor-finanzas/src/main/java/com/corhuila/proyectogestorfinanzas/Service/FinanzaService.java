@@ -28,24 +28,25 @@ public class FinanzaService implements IFinanzaService {
     }
 
     @Override
-    public Finanza save(Finanza gasto){
-        return repository.save(gasto);
+    public Finanza save(Finanza finanza){
+        return repository.save(finanza);
     }
 
     @Override
-    public void update(Finanza gasto, String id){
-        Optional<Finanza> gas = repository.findById(id);
+    public void update(Finanza finanza, String id){
+        Optional<Finanza> fina = repository.findById(id);
 
-        if (!gas.isEmpty()){
-            Finanza gastoUpdate = gas.get();
-            gastoUpdate.setValor(gasto.getValor());
-            gastoUpdate.setCategoria(gasto.getCategoria());
-            gastoUpdate.setFecha(gasto.getFecha());
-            gastoUpdate.setComentario(gasto.getComentario());
+        if (!fina.isEmpty()){
+            Finanza finanzaUpdate = fina.get();
+            finanzaUpdate.setValor(finanza.getValor());
+            finanzaUpdate.setCategoria(finanza.getCategoria());
+            finanzaUpdate.setFecha(finanza.getFecha());
+            finanzaUpdate.setComentario(finanza.getComentario());
+            finanzaUpdate.setOpcion(finanza.getOpcion());
 
-            repository.save(gastoUpdate);
+            repository.save(finanzaUpdate);
         }else{
-            System.out.println("No existe el gasto");
+            System.out.println("No existe la finanza");
         }
     }
     @Override
@@ -53,7 +54,7 @@ public class FinanzaService implements IFinanzaService {
         repository.deleteById(id);
     }
 
-    @Override
+    /*@Override
     public List<Finanza> findByCategoria(String categoria){
         return repository.findByCategoria(categoria);
     }
@@ -66,7 +67,7 @@ public class FinanzaService implements IFinanzaService {
     @Override
     public List<Finanza> findGastosByPersonaId(String personaId){
         return repository.findByPersonaId(personaId);
-    }
+    }*/
 
     @Override
     public List<Finanza> findGastosByPersonaIdAndOpcion(String personaId, String opcion){

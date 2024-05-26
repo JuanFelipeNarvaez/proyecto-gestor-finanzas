@@ -27,41 +27,41 @@
           <ion-label class="hello_lbl">Hello, Please Choose Your Subject</ion-label>
           <ion-grid fixed>
             <ion-row>
-              <ion-col size="6" click="producto">
+              <ion-col size="6" click="Finanza">
                 <div class="col_div">
-                  <ion-button expand="full" fill="clear" href="ingreso" class="button">
-                    <ion-icon :icon="IonIcons.trendingUpOutline" class="iconn"></ion-icon></ion-button>
-                  <ion-label>Ingresos</ion-label>
+                  <ion-button expand="full" fill="clear" href="finanza" class="button">
+                    <ion-icon :icon="IonIcons.barChartOutline" class="iconn"></ion-icon></ion-button>
+                  <ion-label>Finanzas</ion-label>
                 </div>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="6" click="Opcion">
                 <div class="col_div">
-                  <ion-button expand="full" fill="clear" class="button" href="gasto">
-                    <ion-icon :icon="IonIcons.trendingDownOutline" class="iconn"></ion-icon>
+                  <ion-button expand="full" fill="clear" class="button" href="opcion">
+                    <ion-icon :icon="IonIcons.swapVerticalOutline" class="iconn"></ion-icon>
                   </ion-button>
-                  <ion-label>Gastos</ion-label>
+                  <ion-label>Opciones</ion-label>
                 </div>
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col size="6" click="producto">
+              <ion-col size="6" click="usuario">
                 <div class="col_div">
-                  <ion-button expand="full" fill="clear" href="/persona">
+                  <ion-button expand="full" fill="clear" href="persona">
                     <ion-icon :icon="IonIcons.personCircleOutline" class="iconn"></ion-icon></ion-button>
                   <ion-label>Usuarios</ion-label>
                 </div>
               </ion-col>
               <ion-col size="6">
-                <div class="col_div">
-                  <ion-button expand="full" fill="clear" class="button" href="https://github.com/code-corhuila/programacion-movil-2024-a">
-                    <ion-icon :icon="IonIcons.logoGithub" class="iconn"></ion-icon>
+                <div class="col_div" click="rol">
+                  <ion-button expand="full" fill="clear" class="button" href="rol">
+                    <ion-icon :icon="IonIcons.peopleCircleOutline" class="iconn"></ion-icon>
                   </ion-button>
-                  <ion-label>GitHub</ion-label>
+                  <ion-label>Roles</ion-label>
                 </div>
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col size="6" click="producto">
+              <ion-col size="6" click="categoria">
                 <div class="col_div">
                   <ion-button expand="full" fill="clear" class="button" href="/categoria">
                     <ion-icon :icon="IonIcons.pricetagsOutline" class="iconn"></ion-icon></ion-button>

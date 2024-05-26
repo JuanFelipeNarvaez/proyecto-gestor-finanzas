@@ -10,6 +10,8 @@ import IngresoPage from '@/views/IngresoPage.vue';
 import DashboardAdminPage from '@/views/DashboardAdminPage.vue';
 import CategoriaPage from '@/views/CategoriaPage.vue';
 import FinanzaPage from '@/views/FinanzaPage.vue';
+import OpcionPage from '@/views/OpcionPage.vue';
+import RolPage from '@/views/RolPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -65,6 +67,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/finanza',
     name: 'Finanza',
     component: FinanzaPage
+  },
+  {
+    path: '/opcion',
+    name: 'Opcion',
+    component: OpcionPage
+  },
+  {
+    path: '/rol',
+    name: 'Rol',
+    component: RolPage
   }
 ]
 

@@ -48,10 +48,10 @@
                 <ion-accordion v-for="(item, index) in items" :key="index" style="background: greenyellow;">
                   <ion-item slot="header" color="success">
                     <ion-icon :icon="IonIcons.trendingUpOutline"></ion-icon>
-                    <ion-label style="margin-left: 20px">Gasto</ion-label>
+                    <ion-label style="margin-left: 20px">Ingreso</ion-label>
                   </ion-item>
                   <div class="ion-padding" slot="content">
-                    <ion-item style="background: rosybrown;">
+                    <ion-item>
                       <ion-label>Valor: </ion-label>
                       <ion-label>{{ item.valor }}</ion-label>
                     </ion-item>
@@ -111,7 +111,7 @@
   
   // Rutas de la API
   // const baseURL = 'http://localhost:9000/shopping-car/api/cliente';
-  const baseURL = 'http://localhost:9000/prueba/api/gasto';
+  const baseURL = 'http://localhost:9000/prueba/api/finanza';
   //const baseURL = 'https://zctlpc09-9000.use.devtunnels.ms/shopping-car/api/cliente';
   const modalIsOpen = ref(false);
   const items = ref<Array<ItemType>>([]);
@@ -131,7 +131,7 @@
   const showDeleted = ref<boolean>(false);
   
   const idref = localStorage.getItem('id');
-  localStorage.setItem('opcion', 'ingreso');
+  localStorage.setItem('opcion', 'Ingreso');
   const opcion1 = localStorage.getItem('opcion');
   
   
@@ -157,7 +157,7 @@
   // Métodos
   async function findAllRecords() {
     try {
-      const response = await axios.get(`http://localhost:9000/prueba/api/gasto/byPersona/${idref}/${opcion1}`);
+      const response = await axios.get(`http://localhost:9000/prueba/api/finanza/byPersona/${idref}/66538aa449119e23a98bd618`);
       items.value = response.data;
     } catch (error) {
       console.error('Error al obtener todos los registros:', error);
@@ -208,7 +208,9 @@
       },
       fecha: fecha.value,
       comentario: comentario.value,
-      opcion: opcion1,
+      opcion: {
+        id: "66538aa449119e23a98bd618"
+      },
       persona: {
         id: idref
       }

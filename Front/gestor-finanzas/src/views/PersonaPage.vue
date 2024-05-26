@@ -2,7 +2,10 @@
   <ion-page @ionViewDidEnter="findAllRecords">
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Carrito de compra</ion-title>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="dashboardAdmin" style="margin-top: 5px"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Personas</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content fullscreen>
@@ -41,12 +44,12 @@
 
         <!-- Mostrar datos -->
         <div class="table-container">
-          <ion-list>
+          <ion-list style="background: linear-gradient( to right, #f46b45, #eea849);">
             <ion-accordion-group>
-              <ion-accordion v-for="(item, index) in items" :key="index">
+              <ion-accordion v-for="(item, index) in items" :key="index" style="background: greenyellow;">
                 <ion-item slot="header" color="success">
-                  <ion-icon :icon="IonIcons.trendingUpOutline"></ion-icon>
-                  <ion-label style="margin-left: 20px">Personas</ion-label>
+                  <ion-icon :icon="IonIcons.personCircleOutline"></ion-icon>
+                  <ion-label style="margin-left: 20px">Persona</ion-label>
                 </ion-item>
                 <div class="ion-padding" slot="content">
                   <ion-item style="background: rosybrown;">
@@ -105,9 +108,10 @@
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonIcon, IonModal, IonItem, IonLabel, IonSelect, IonSelectOption,
-  IonButton, IonAccordion, IonAccordionGroup, IonList
- } from '@ionic/vue';
+import {
+  IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonIcon, IonModal, IonItem, IonLabel, IonSelect, IonSelectOption,
+  IonButton, IonAccordion, IonAccordionGroup, IonList, IonButtons, IonBackButton
+} from '@ionic/vue';
 import InputComponent from '@/components/InputComponent.vue';
 import CrudButtonComponent from '@/components/CrudButtonComponent.vue';
 import { showSuccessMessage, showErrorMessage } from '@/utils/alerts';
@@ -176,7 +180,7 @@ async function findAllRecords() {
 async function findAllRoles() {
   try {
     const response = await axios.get('http://localhost:9000/prueba/api/rol');
-    console.log('Roles response:', response.data)
+    //console.log('Roles response:', response.data)
     roles.value = response.data;
   } catch (error) {
     console.error('Error al obtener todos los roles:', error);
@@ -222,7 +226,7 @@ async function createRecord() {
       id: rol.value,
     }
   };
-  console.log('Datos enviados:', data);
+  //console.log('Datos enviados:', data);
 
   try {
     const response = await axios.post(baseURL, data);
@@ -277,16 +281,6 @@ async function deleteRecordPhysical(id: String) {
     return response.data;
   } catch (error) {
     console.error('Error al eliminar el registro físico:', error);
-    throw error;
-  }
-}
-
-async function deleteRecordLogical(id) {
-  try {
-    const response = await axios.put(`${baseURL}/delete-logical/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error al realizar el eliminado lógico:', error);
     throw error;
   }
 }

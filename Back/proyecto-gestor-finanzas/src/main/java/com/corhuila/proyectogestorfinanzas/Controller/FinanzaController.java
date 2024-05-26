@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("api/gasto")
+@RequestMapping("api/finanza")
 public class FinanzaController {
     @Autowired
     private IFinanzaService service;
@@ -28,13 +28,13 @@ public class FinanzaController {
     }
 
     @PostMapping()
-    public Finanza save(@RequestBody Finanza gasto){
-        return service.save(gasto);
+    public Finanza save(@RequestBody Finanza finanza){
+        return service.save(finanza);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody Finanza gasto, @PathVariable String id){
-        service.update(gasto, id);
+    public void update(@RequestBody Finanza finanza, @PathVariable String id){
+        service.update(finanza, id);
     }
 
     @DeleteMapping("/{id}")
