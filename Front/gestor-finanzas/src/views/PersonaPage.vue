@@ -222,6 +222,7 @@ async function createRecord() {
       id: rol.value,
     }
   };
+  console.log('Datos enviados:', data);
 
   try {
     const response = await axios.post(baseURL, data);

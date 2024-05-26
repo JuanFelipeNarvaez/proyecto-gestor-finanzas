@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Document(collection = "gasto")
@@ -13,10 +14,10 @@ public class Finanza {
     private String id;
     @Field
     private Integer valor;
+    @DBRef
+    private Categoria categoria;
     @Field
-    private String categoria;
-    @Field
-    private Date fecha;
+    private LocalDate fecha;
     @Field
     private String comentario;
     @Field
@@ -49,19 +50,19 @@ public class Finanza {
         this.valor = valor;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

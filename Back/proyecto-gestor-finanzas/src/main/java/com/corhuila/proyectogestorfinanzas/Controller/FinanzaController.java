@@ -42,20 +42,20 @@ public class FinanzaController {
         service.delete(id);
     }
 
-    @GetMapping("/findByCategoria/{categoria}")
+    /*@GetMapping("/findByCategoria/{categoria}")
     public List<Finanza> findByCategoria(@PathVariable String categoria){
         return service.findByCategoria(categoria);
-    }
+    }*/
 
-    @GetMapping("/{persona}")
+    /*@GetMapping("/{persona}")
     public List<Finanza> findByPersona(@PathVariable Persona persona){
         return service.findByPersona(persona);
-    }
+    }*/
 
-    @GetMapping("/byPersona/{personaId}")
+    /*@GetMapping("/byPersona/{personaId}")
     public List<Finanza> getGastosByPersonaId(@PathVariable String personaId){
         return service.findGastosByPersonaId(personaId);
-    }
+    }*/
 
     @GetMapping("/byPersona/{personaId}/{opcion}")
     public List<Finanza> getGastoByPersonaIdAndOpcion(@PathVariable String personaId, @PathVariable String opcion){

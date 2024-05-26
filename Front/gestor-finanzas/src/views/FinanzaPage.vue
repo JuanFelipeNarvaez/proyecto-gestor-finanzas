@@ -5,7 +5,7 @@
           <ion-buttons slot="start">
             <ion-back-button defaultHref="dashboard" style="margin-top: 5px"></ion-back-button>
           </ion-buttons>
-          <ion-title>Ingresos</ion-title>
+          <ion-title>Finanzas</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content fullscreen>
@@ -18,7 +18,7 @@
           <ion-modal :is-open="modalIsOpen" @didDismiss="modalIsOpen = false" :css-class="['my-custom-modal']">
             <div class="modal-content">
               <div id="data-form">
-                <InputComponent v-model="valor" id="valor" name="valor" label="valor: " type="number"/>
+                <InputComponent v-model="valor" id="valor" name="valor" label="valor: " type="number" />
                 <ion-item>
                   <ion-label>Categoria: </ion-label>
                   <ion-select v-model="categoria" placeholder="Seleccione una categoria">
@@ -45,9 +45,9 @@
           <div class="table-container">
             <ion-list style="background: linear-gradient( to right, #f46b45, #eea849);">
               <ion-accordion-group>
-                <ion-accordion v-for="(item, index) in items" :key="index" style="background: greenyellow;">
-                  <ion-item slot="header" color="success">
-                    <ion-icon :icon="IonIcons.trendingUpOutline"></ion-icon>
+                <ion-accordion v-for="(item, index) in items" :key="index" style="background: #ff3f3f;">
+                  <ion-item slot="header" color="danger">
+                    <ion-icon :icon="IonIcons.trendingDownOutline"></ion-icon>
                     <ion-label style="margin-left: 20px">Gasto</ion-label>
                   </ion-item>
                   <div class="ion-padding" slot="content">
@@ -131,14 +131,14 @@
   const showDeleted = ref<boolean>(false);
   
   const idref = localStorage.getItem('id');
-  localStorage.setItem('opcion', 'ingreso');
+  localStorage.setItem('opcion', 'gasto');
   const opcion1 = localStorage.getItem('opcion');
   
   
   // Tipos
   interface ItemType {
     id: string;
-    valor: number;
+    valor: string;
     categoria: string;
     fecha: Date;
     comentario: string;
@@ -157,7 +157,7 @@
   // Métodos
   async function findAllRecords() {
     try {
-      const response = await axios.get(`http://localhost:9000/prueba/api/gasto/byPersona/${idref}/${opcion1}`);
+      const response = await axios.get(`http://localhost:9000/prueba/api/gasto`);
       items.value = response.data;
     } catch (error) {
       console.error('Error al obtener todos los registros:', error);
@@ -196,36 +196,6 @@
     } catch (error) {
       console.error('Error al encontrar el registro por ID:', error);
       throw error;
-    }
-  }
-  
-  async function createRecord() {
-    const personaId = localStorage.getItem('id');
-    const data = {
-      valor: valor.value,
-      categoria: {
-        id: categoria.value
-      },
-      fecha: fecha.value,
-      comentario: comentario.value,
-      opcion: opcion1,
-      persona: {
-        id: idref
-      }
-      
-    };
-    console.log('Datos enviados:', data);
-  
-    try {
-      const response = await axios.post(baseURL, data);
-      console.log('Registro creado exitosamente:', response.data);
-      await findAllRecords();
-      await clearData();
-      await showSuccessMessage();
-      await closeModal();
-    } catch (error) {
-      console.error('Error al crear el registro:', error);
-      await showErrorMessage();
     }
   }
   

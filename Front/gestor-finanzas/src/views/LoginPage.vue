@@ -102,11 +102,16 @@ const loginn = async () => {
     if (response.data) {
       const userId = response.data.id;
       const nombre = response.data.nombre;
+      const rol = response.data.rol.nombre;
       localStorage.setItem('nombre', nombre);
       localStorage.setItem('id', userId);
       localStorage.setItem('gmail', gmail.value);
+      localStorage.setItem('rol', rol);
+      if(rol == 'Usuario'){
         router.push('/dashboard');
-      
+      }else{
+        router.push('/dashboardAdmin')
+      }
     } else {
       error.value = 'Incorrect credentials. Please try again.';
     }

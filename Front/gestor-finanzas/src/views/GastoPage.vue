@@ -18,8 +18,16 @@
         <ion-modal :is-open="modalIsOpen" @didDismiss="modalIsOpen = false" :css-class="['my-custom-modal']">
           <div class="modal-content">
             <div id="data-form">
-              <InputComponent v-model="valor" id="valor" name="valor" label="valor: " />
-              <InputComponent v-model="categoria" id="categoria" name="categoria" label="Categoria: " />
+              <InputComponent v-model="valor" id="valor" name="valor" label="valor: " type="number" />
+              <ion-item>
+                <ion-label>Categoria: </ion-label>
+                <ion-select v-model="categoria" placeholder="Seleccione una categoria">
+                  <ion-select-option v-for="categoriaItem in categorias" :key="categoriaItem.id"
+                    :value="categoriaItem.id">
+                    {{ categoriaItem.nombre }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
               <InputComponent v-model="fecha" id="fecha" name="fecha" label="Fecha: " type="date" />
               <InputComponent v-model="comentario" id="comentario" name="comentario" label="Comentario: " />
             </div>
@@ -51,7 +59,7 @@
                 <div class="ion-padding" slot="content">
                   <ion-item>
                     <ion-label>Categoria: </ion-label>
-                    <ion-label>{{ item.categoria }}</ion-label>
+                    <ion-label>{{ item.categoria.nombre }}</ion-label>
                   </ion-item>
                 </div>
                 <div class="ion-padding" slot="content">
@@ -90,7 +98,7 @@
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonIcon, IonModal,
   IonList, IonAccordion, IonAccordionGroup, IonItem, IonButton, IonLabel,
-  IonButtons, IonBackButton
+  IonButtons, IonBackButton, IonSelect, IonSelectOption
 } from '@ionic/vue';
 import InputComponent from '@/components/InputComponent.vue';
 import CrudButtonComponent from '@/components/CrudButtonComponent.vue';
@@ -107,6 +115,8 @@ const baseURL = 'http://localhost:9000/prueba/api/gasto';
 //const baseURL = 'https://zctlpc09-9000.use.devtunnels.ms/shopping-car/api/cliente';
 const modalIsOpen = ref(false);
 const items = ref<Array<ItemType>>([]);
+const categorias = ref<Array<CategoriaType>>([]);
+
 const id = ref('');
 const valor = ref('');
 const categoria = ref('');
@@ -134,8 +144,14 @@ interface ItemType {
   comentario: string;
 }
 
+interface CategoriaType {
+  id: string;
+  nombre: string;
+}
+
 onMounted(() => {
   findAllRecords();
+  findAllCategorias();
 });
 
 // Métodos
@@ -145,6 +161,16 @@ async function findAllRecords() {
     items.value = response.data;
   } catch (error) {
     console.error('Error al obtener todos los registros:', error);
+    throw error;
+  }
+}
+async function findAllCategorias() {
+  try {
+    const response = await axios.get('http://localhost:9000/prueba/api/categoria');
+    console.log('Categorias response:', response.data)
+    categorias.value = response.data;
+  } catch (error) {
+    console.error('Error al obtener todos los roles:', error);
     throw error;
   }
 }
@@ -158,7 +184,7 @@ async function findById(recordId: string) {
 
     id.value = data.id;
     valor.value = data.valor;
-    categoria.value = data.categoria;
+    categoria.value = data.categoria.id;
     fecha.value = data.fecha;
     comentario.value = data.comentario;
 
@@ -177,14 +203,18 @@ async function createRecord() {
   const personaId = localStorage.getItem('id');
   const data = {
     valor: valor.value,
-    categoria: categoria.value,
+    categoria: {
+      id: categoria.value
+    },
     fecha: fecha.value,
     comentario: comentario.value,
     opcion: opcion1,
     persona: {
       id: idref
     }
+
   };
+  console.log('Datos enviados:', data);
 
   try {
     const response = await axios.post(baseURL, data);
@@ -203,7 +233,9 @@ async function updateRecord() {
   const data = {
     id: id.value,
     valor: valor.value,
-    categoria: categoria.value,
+    categoria: {
+      id: categoria.value
+    },
     fecha: fecha.value,
     comentario: comentario.value,
   };

@@ -1,26 +1,20 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import HomePage from '../views/HomePage.vue'
-import ClientePage from '../views/ClientePage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import DashboardPage from '../views/DashboardPage.vue';
 import PersonaPage from '../views/PersonaPage.vue'
 import InicioPage from '@/views/InicioPage.vue';
-import ProductoPage from '@/views/GastoPage.vue';
 import RegistroPage from '@/views/RegistroPage.vue';
 import GastoPage from '@/views/GastoPage.vue';
 import IngresoPage from '@/views/IngresoPage.vue';
 import DashboardAdminPage from '@/views/DashboardAdminPage.vue';
+import CategoriaPage from '@/views/CategoriaPage.vue';
+import FinanzaPage from '@/views/FinanzaPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: '/inicio'
-  },
-  {
-    path: '/cliente',
-    name: 'Cliente',
-    component: ClientePage
   },
   {
     path: '/login',
@@ -62,6 +56,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'DashboardAdmin',
     component: DashboardAdminPage
   },
+  {
+    path: '/categoria',
+    name: 'Categoria',
+    component: CategoriaPage
+  },
+  {
+    path: '/finanza',
+    name: 'Finanza',
+    component: FinanzaPage
+  }
 ]
 
 const router = createRouter({
