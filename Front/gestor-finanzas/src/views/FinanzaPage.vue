@@ -30,6 +30,16 @@
                 </ion-item>
                 <InputComponent v-model="fecha" id="fecha" name="fecha" label="Fecha: " type="date" />
                 <InputComponent v-model="comentario" id="comentario" name="comentario" label="Comentario: " />
+                <InputComponent v-model="opcion" id="opcion" name="opcion" label="Opcion: " />
+                <ion-item>
+                  <ion-label>Persona: </ion-label>
+                  <ion-select v-model="persona" placeholder="Seleccione una categoria">
+                    <ion-select-option v-for="personaItem in personas" :key="personaItem.id"
+                      :value="personaItem.id">
+                      {{ personaItem.nombre }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
               </div>
               <div>
                 <!-- Botones de CRUD dentro del modal -->
@@ -45,10 +55,10 @@
           <div class="table-container">
             <ion-list style="background: linear-gradient( to right, #f46b45, #eea849);">
               <ion-accordion-group>
-                <ion-accordion v-for="(item, index) in items" :key="index" style="background: #ff3f3f;">
-                  <ion-item slot="header" color="danger">
+                <ion-accordion v-for="(item, index) in items" :key="index" style="background: yellow;">
+                  <ion-item slot="header" color="warning">
                     <ion-icon :icon="IonIcons.trendingDownOutline"></ion-icon>
-                    <ion-label style="margin-left: 20px">Gasto</ion-label>
+                    <ion-label style="margin-left: 20px">Finanza</ion-label>
                   </ion-item>
                   <div class="ion-padding" slot="content">
                     <ion-item style="background: rosybrown;">
@@ -72,6 +82,18 @@
                     <ion-item>
                       <ion-label>Comentario: </ion-label>
                       <ion-label>{{ item.comentario }}</ion-label>
+                    </ion-item>
+                  </div>
+                  <div class="ion-padding" slot="content">
+                    <ion-item>
+                      <ion-label>Persona: </ion-label>
+                      <ion-label>{{ item.persona.nombre }}</ion-label>
+                    </ion-item>
+                  </div>
+                  <div class="ion-padding" slot="content">
+                    <ion-item>
+                      <ion-label>Opcion: </ion-label>
+                      <ion-label>{{ item.opcion }}</ion-label>
                     </ion-item>
                   </div>
                   <div class="ion-pading" slot="content">
@@ -116,6 +138,7 @@
   const modalIsOpen = ref(false);
   const items = ref<Array<ItemType>>([]);
   const categorias = ref<Array<CategoriaType>>([]);
+  const personas = ref<Array<PersonaType>>([]);
   
   const id = ref('');
   const valor = ref('');
@@ -142,9 +165,16 @@
     categoria: string;
     fecha: Date;
     comentario: string;
+    opcion: string;
+    persona: string;
   }
   
   interface CategoriaType {
+    id: string;
+    nombre: string;
+  }
+
+  interface PersonaType {
     id: string;
     nombre: string;
   }
@@ -152,6 +182,7 @@
   onMounted(() => {
     findAllRecords();
     findAllCategorias();
+    findAllPersonas();
   });
   
   // Métodos
@@ -174,6 +205,17 @@
       throw error;
     }
   }
+
+  async function findAllPersonas() {
+    try {
+      const response = await axios.get('http://localhost:9000/prueba/api/persona');
+      console.log('Categorias response:', response.data)
+      personas.value = response.data;
+    } catch (error) {
+      console.error('Error al obtener todos los roles:', error);
+      throw error;
+    }
+  }
   
   //Cargar los datos para edición
   async function findById(recordId: string) {
@@ -187,6 +229,7 @@
       categoria.value = data.categoria.id;
       fecha.value = data.fecha;
       comentario.value = data.comentario;
+      persona.value = data.persona.id;
   
       // Controlar la visibilidad de los botones
       showCreated.value = false;
@@ -196,6 +239,36 @@
     } catch (error) {
       console.error('Error al encontrar el registro por ID:', error);
       throw error;
+    }
+  }
+
+  async function createRecord() {
+    const personaId = localStorage.getItem('id');
+    const data = {
+      valor: valor.value,
+      categoria: {
+        id: categoria.value
+      },
+      fecha: fecha.value,
+      comentario: comentario.value,
+      opcion: opcion.value,
+      persona: {
+        id: persona.value,
+      }
+      
+    };
+    console.log('Datos enviados:', data);
+  
+    try {
+      const response = await axios.post(baseURL, data);
+      console.log('Registro creado exitosamente:', response.data);
+      await findAllRecords();
+      await clearData();
+      await showSuccessMessage();
+      await closeModal();
+    } catch (error) {
+      console.error('Error al crear el registro:', error);
+      await showErrorMessage();
     }
   }
   
@@ -208,6 +281,9 @@
       },
       fecha: fecha.value,
       comentario: comentario.value,
+      persona: {
+        id: persona.value
+      }
     };
   
     try {
@@ -256,6 +332,7 @@
     categoria.value = '';
     fecha.value = '';
     comentario.value = '';
+    persona.value = '';
   }
   
   
