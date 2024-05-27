@@ -57,7 +57,8 @@ import * as IonIcons from 'ionicons/icons';
 import axios from 'axios';
 
 
-const baseURL = 'http://localhost:9000/prueba/api/persona';
+//const baseURL = 'http://localhost:9000/prueba/api/persona';
+const baseURL = 'https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/persona';
 const selectedOption =ref('login');
 const id=ref('');
 const gmail = ref('');

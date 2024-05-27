@@ -1,0 +1,2 @@
+// capacitor.settings.gradle file
+println "Capacitor settings.gradle file is applied."

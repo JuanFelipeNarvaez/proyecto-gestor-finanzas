@@ -81,11 +81,11 @@ import axios from 'axios';
 
 
 // Rutas de la API
-// const baseURL = 'http://localhost:9000/shopping-car/api/cliente';
-const baseURL = 'http://localhost:9000/prueba/api/categoria';
-//const baseURL = 'https://zctlpc09-9000.use.devtunnels.ms/shopping-car/api/cliente';
+//const baseURL = 'http://localhost:9000/prueba/api/categoria';
+const baseURL = 'https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/categoria';
 const modalIsOpen = ref(false);
 const items = ref<Array<ItemType>>([]);
+    
 
 
 const id = ref('');
@@ -193,16 +193,6 @@ async function deleteRecordPhysical(id: String) {
         return response.data;
     } catch (error) {
         console.error('Error al eliminar el registro físico:', error);
-        throw error;
-    }
-}
-
-async function deleteRecordLogical(id) {
-    try {
-        const response = await axios.put(`${baseURL}/delete-logical/${id}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error al realizar el eliminado lógico:', error);
         throw error;
     }
 }

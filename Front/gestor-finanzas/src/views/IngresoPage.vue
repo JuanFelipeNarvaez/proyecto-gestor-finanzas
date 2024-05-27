@@ -111,8 +111,8 @@
   
   // Rutas de la API
   // const baseURL = 'http://localhost:9000/shopping-car/api/cliente';
-  const baseURL = 'http://localhost:9000/prueba/api/finanza';
-  //const baseURL = 'https://zctlpc09-9000.use.devtunnels.ms/shopping-car/api/cliente';
+  //const baseURL = 'http://localhost:9000/prueba/api/finanza';
+  const baseURL = 'https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/finanza';
   const modalIsOpen = ref(false);
   const items = ref<Array<ItemType>>([]);
   const categorias = ref<Array<CategoriaType>>([]);
@@ -157,7 +157,8 @@
   // Métodos
   async function findAllRecords() {
     try {
-      const response = await axios.get(`http://localhost:9000/prueba/api/finanza/byPersona/${idref}/66538aa449119e23a98bd618`);
+      //const response = await axios.get(`http://localhost:9000/prueba/api/finanza/byPersona/${idref}/66538aa449119e23a98bd618`);
+      const response = await axios.get(`https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/finanza/byPersona/${idref}/66538aa449119e23a98bd618`);
       items.value = response.data;
     } catch (error) {
       console.error('Error al obtener todos los registros:', error);
@@ -166,7 +167,8 @@
   }
   async function findAllCategorias() {
     try {
-      const response = await axios.get('http://localhost:9000/prueba/api/categoria');
+      //const response = await axios.get('http://localhost:9000/prueba/api/categoria');
+      const response = await axios.get('https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/categoria');
       console.log('Categorias response:', response.data)
       categorias.value = response.data;
     } catch (error) {
@@ -269,16 +271,6 @@
       return response.data;
     } catch (error) {
       console.error('Error al eliminar el registro físico:', error);
-      throw error;
-    }
-  }
-  
-  async function deleteRecordLogical(id) {
-    try {
-      const response = await axios.put(`${baseURL}/delete-logical/${id}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error al realizar el eliminado lógico:', error);
       throw error;
     }
   }

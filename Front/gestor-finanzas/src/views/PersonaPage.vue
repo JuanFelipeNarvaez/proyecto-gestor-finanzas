@@ -123,8 +123,8 @@ import axios from 'axios';
 
 // Rutas de la API
 // const baseURL = 'http://localhost:9000/shopping-car/api/cliente';
-const baseURL = 'http://localhost:9000/prueba/api/persona';
-//const baseURL = 'https://zctlpc09-9000.use.devtunnels.ms/shopping-car/api/cliente';
+//const baseURL = 'http://localhost:9000/prueba/api/persona';
+const baseURL = 'https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/persona';
 const modalIsOpen = ref(false);
 const items = ref<Array<ItemType>>([]);
 const roles = ref<Array<RolType>>([]);
@@ -179,7 +179,8 @@ async function findAllRecords() {
 
 async function findAllRoles() {
   try {
-    const response = await axios.get('http://localhost:9000/prueba/api/rol');
+    //const response = await axios.get('http://localhost:9000/prueba/api/rol');
+    const response = await axios.get('https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/rol');
     //console.log('Roles response:', response.data)
     roles.value = response.data;
   } catch (error) {

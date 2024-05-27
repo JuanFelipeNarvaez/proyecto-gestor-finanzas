@@ -60,7 +60,8 @@ import { ref } from 'vue';
 
 
 
-const baseURL = 'http://localhost:9000/prueba/api/persona';
+//const baseURL = 'http://localhost:9000/prueba/api/persona';
+const baseURL = 'https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/persona';
 const nombre= ref('');
 const apellido = ref('');
 const edad = ref('');

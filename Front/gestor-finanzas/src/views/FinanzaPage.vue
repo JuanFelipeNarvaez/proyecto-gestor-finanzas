@@ -140,9 +140,8 @@
   
   
   // Rutas de la API
-  // const baseURL = 'http://localhost:9000/shopping-car/api/cliente';
-  const baseURL = 'http://localhost:9000/prueba/api/finanza';
-  //const baseURL = 'https://zctlpc09-9000.use.devtunnels.ms/shopping-car/api/cliente';
+  //const baseURL = 'http://localhost:9000/prueba/api/finanza';
+  const baseURL = 'https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/finanza'
   const modalIsOpen = ref(false);
   const items = ref<Array<ItemType>>([]);
   const categorias = ref<Array<CategoriaType>>([]);
@@ -211,7 +210,8 @@
   }
   async function findAllCategorias() {
     try {
-      const response = await axios.get('http://localhost:9000/prueba/api/categoria');
+      //const response = await axios.get('http://localhost:9000/prueba/api/categoria');
+      const response = await axios.get('https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/categoria')
       //console.log('Categorias response:', response.data)
       categorias.value = response.data;
     } catch (error) {
@@ -222,7 +222,8 @@
 
   async function findAllPersonas() {
     try {
-      const response = await axios.get('http://localhost:9000/prueba/api/persona');
+      //const response = await axios.get('http://localhost:9000/prueba/api/persona');
+      const response = await axios.get('https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/persona');
       //console.log('Personas response:', response.data)
       personas.value = response.data;
     } catch (error) {
@@ -233,7 +234,8 @@
 
   async function findAllOpciones() {
     try {
-      const response = await axios.get('http://localhost:9000/prueba/api/opcion');
+      //const response = await axios.get('http://localhost:9000/prueba/api/opcion');
+      const response = await axios.get('https://t5fkgr8c-9000.use2.devtunnels.ms/prueba/api/opcion');
       //console.log('Opciones response:', response.data)
       opciones.value = response.data;
     } catch (error) {

@@ -45,6 +45,6 @@ public class CategoriaService implements ICategoriaService {
 
     @Override
     public void delete(String id) {
-
+        repository.deleteById(id);
     }
 }
